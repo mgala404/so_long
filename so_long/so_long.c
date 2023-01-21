@@ -10,16 +10,49 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx/mlx.h"
+#include "so_long.h"
 
-int main()
+
+int    close_win(t_vb *tat)
 {
-    void    *mlx;
-    void    *mlx_win;
-    
-
-    mlx = mlx_init();
-    mlx_win = mlx_new_window(mlx, 1920, 1080, "so_short");
-    mlx_loop(mlx);
-
+    mlx_destroy_window(tat->mlx, tat->mlx_win);
+    mlx_destroy_display(tat->mlx);
+    free(tat->mlx);
+    free(tat->mlx_win);
+    free(tat);
+    exit (0);
 }
+
+char    *getmap(char *path)
+{
+    int     fd;
+    char    *str;
+    char    *onzo;
+
+    onzo = calloc (1, 1);
+    fd = open(path, O_RDONLY);
+    while (1)
+    {
+        str = get_next_line(fd);
+        if (!str)
+            break;    
+        onzo = ft_freejoints(onzo, str);
+    }
+    free(str);
+    close(fd);
+    return (onzo);
+}
+
+int main(int ac, char **av)
+{
+    t_vb *tat;
+
+    tat = malloc (sizeof (t_vb));
+    tat->map = getmap(av[1]);
+    printf("%s\n", tat->map);
+    tat->mlx = mlx_init();
+    tat->mlx_win = mlx_new_window(tat->mlx, 80, 620, "so_short");
+    mlx_hook(tat->mlx_win, 17, 0, close_win, &tat);
+    mlx_loop(tat->mlx);
+}
+
