@@ -51,7 +51,7 @@ int main(int ac, char **av)
     tat->map = getmap(av[1]);
     printf("%s\n", tat->map);
     tat->mlx = mlx_init();
-    tat->mlx_win = mlx_new_window(tat->mlx, 80, 620, "so_short");
+    tat->mlx_win = mlx_new_window(tat->mlx, 580, 620, "so_short");
     mlx_hook(tat->mlx_win, 17, 0, close_win, &tat);
     mlx_loop(tat->mlx);
 }
