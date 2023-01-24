@@ -1,0 +1,33 @@
+{
+    "activeFile": "",
+    "expandedProjectPaths": [
+        "."
+    ],
+    "file.lastUsedOpenFilter": "All Files (*)",
+    "fileStates": {
+        "/nfs/homes/llombard/Desktop/pippo.xmp": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "ciccio.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1,
+            "scaleInEditor": 2
+        },
+        "pippo.tsx": {
+            "dynamicWrapping": false
+        }
+    },
+    "frame.defaultDuration": 40,
+    "last.imagePath": "/nfs/homes/llombard/Downloads/dungeon-pack-free_version/sprite",
+    "last.objectTemplatePath": "/nfs/homes/llombard/Downloads/dungeon-pack-free_version/sprite",
+    "openFiles": [
+    ],
+    "project": "untitled.tiled-project",
+    "recentFiles": [
+        "/nfs/homes/llombard/Desktop/pippo.xmp",
+        "ciccio.tsx"
+    ],
+    "tileset.lastUsedFormat": "tsx"
+}
