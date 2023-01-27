@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "so_long.h"
+#include <stdio.h>
 
 
 int    close_win(t_vb *tat)
@@ -43,16 +44,42 @@ char    *getmap(char *path)
     return (onzo);
 }
 
+void    ft_img_init(t_vb *tat, t_img *mat)
+{
+    mat->img_h = 32;
+    mat->img_w = 32;
+    mat->pg = mlx_xpm_file_to_image(tat->mlx, "/Ninjia&co/NinjaS1.xpm", &mat->img_h, &mat->img_w);
+}
+
+void    ft_num(t_vb *tat, t_img *mat)
+{
+    char     *mapcode;
+
+    mapcode = getmap(tat->map);
+    if(mapcode == "P")
+        mlx_put_image_to_window(tat, tat->mlx_win, mat->pg, &mat->img_h, &mat->img_w);
+}
+
+int     ft_key_handler(int keycode, t_vb *tat)
+{
+    if(keycode == 65307)
+        close_win(tat);
+    return(0);
+}
 int main(int ac, char **av)
 {
     t_vb *tat;
+    t_img *mat;
 
     tat = malloc (sizeof (t_vb));
+    mat = malloc (sizeof (t_img));
     tat->map = getmap(av[1]);
-    printf("%s\n", tat->map);
+    //printf("\n%s\n", tat->map);
     tat->mlx = mlx_init();
-    tat->mlx_win = mlx_new_window(tat->mlx, 580, 620, "so_short");
+    tat->mlx_win = mlx_new_window(tat->mlx, 320, 165, "so_short");
+    ft_img_init(tat, mat);
+    ft_num(tat, mat);
     mlx_hook(tat->mlx_win, 17, 0, close_win, &tat);
+    mlx_key_hook(tat->mlx_win, ft_key_handler, &tat);
     mlx_loop(tat->mlx);
 }
-

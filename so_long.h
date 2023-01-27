@@ -12,4 +12,14 @@ typedef struct s_dioc{
     char    *map;
 } t_vb;
 
+typedef struct s_img{
+    void    *pg;
+    void    *ground;
+    void    *wall;
+    void    *door;
+    int     img_w;
+    int     img_h;
+}t_img;
+
+
 #endif
