@@ -15,7 +15,7 @@ typedef struct s_pos{
     struct  s_pos   *s;
     struct  s_pos   *d;
     char    fload;
-}t_pos;
+} t_pos;
 
 typedef struct s_cord{
     int     x;
@@ -41,8 +41,6 @@ typedef struct s_img{
     void    *potion;
     int     img_w;
     int     img_h;
-}t_img;
-
-
+} t_img;
 
 #endif

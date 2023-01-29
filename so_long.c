@@ -69,9 +69,35 @@ void    map_cord(t_vb *tat, char *path)
 
 void    ft_img_init(t_vb *tat, t_img *mat)
 {
+    int     i;
+
+    i = 0;
     mat->img_h = 32;
     mat->img_w = 32;
-    mat->pg = mlx_xpm_file_to_image(tat->mlx, "/Ninjia&co/NinjaS1.xpm", &mat->img_h, &mat->img_w);
+    while(i <= 2)
+    {
+        if(/*coordinate x e y == coordinate di exit*/)
+        {
+            mat->pg = mlx_xpm_file_to_image(tat->mlx, "/Ninjia&co/BeninoExit.xpm", &mat->img_h, &mat->img_w);
+            break;
+        }
+        else if(i = 0)
+            mat->pg = mlx_xpm_file_to_image(tat->mlx, "/Ninjia&co/benny.xpm", &mat->img_h, &mat->img_w);
+        else if(i = 1)
+            mat->pg = mlx_xpm_file_to_image(tat->mlx, "/Ninjia&co/benny1.xpm", &mat->img_h, &mat->img_w);
+        else if(i = 2)
+        {
+            mat->pg = mlx_xpm_file_to_image(tat->mlx, "/Ninjia&co/benny2.xpm", &mat->img_h, &mat->img_w);
+            i = 0;
+        } 
+        if(keycode == 65361 || keycode == 65363 || keycode == 65362 || keycode 65364)
+            i++;
+    }
+}
+
+void    image_to_win()
+{
+    	mlx_put_image_to_window(t_vb,t_win_list *win,t_img *img, int x,int y)
 }
 
 int     ft_key_handler(int keycode, t_vb *tat)
@@ -84,18 +110,19 @@ int main(int ac, char **av)
 {
     t_vb *tat;
     t_img *mat;
-
+    
     if (ac == 2)
     {
     tat = malloc (sizeof (t_vb));
     mat = malloc (sizeof (t_img));
     tat->map = getmap(av[1]);
     //printf("\n%s\n", tat->map);
+    //printf("\n%p\n", tat->mlx_win);
     map_cord(tat, tat->map);
+    image_to_win(tat, tat->map, tat->mlx_win, );
     tat->mlx = mlx_init();
     tat->mlx_win = mlx_new_window(tat->mlx, tat->coordin.x * SIZE, tat->coordin.y * SIZE, "so_short");
     ft_img_init(tat, mat);
-    //ft_num(tat, mat);
     mlx_hook(tat->mlx_win, 17, 0, close_win, &tat);
     mlx_key_hook(tat->mlx_win, ft_key_handler, &tat);
     mlx_loop(tat->mlx);
