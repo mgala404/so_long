@@ -30,7 +30,6 @@ typedef struct s_img{
 typedef struct s_vb{
     void    *mlx;
     void    *mlx_win;
- // char    *map;
     t_cord  size;
     char  **mappa;
     t_img   *imag;

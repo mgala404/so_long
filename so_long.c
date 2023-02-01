@@ -85,7 +85,6 @@ int     ft_matlen(char **map)
         tat->mappa[y] = (t_pos*)malloc (sizeof(t_pos) * (x + 1));
 }*/
 
-
 int     ft_key_handler(int keycode, t_vb *tat)
 {
     if(keycode == 65307)
@@ -119,7 +118,8 @@ void    image_to_win(t_vb *tat, t_cord cord)
         mlx_put_image_to_window(tat, tat->mlx_win, tat->imag->jesus, tat->size.x * 32, tat->size.y * 32);
     else if(tat->mappa[cord.y][cord.x] = 'C')
         mlx_put_image_to_window(tat, tat->mlx_win, tat->imag->penguin, tat->size.x * 32, tat->size.y * 32);
-}   
+}
+
 int ft_printmap(char **map, t_vb tat)
 {
     int y;
@@ -141,6 +141,7 @@ int ft_printmap(char **map, t_vb tat)
     }
     return (0);
 }
+
 int main(int ac, char **av)
 {
     t_vb *tat;
@@ -151,8 +152,8 @@ int main(int ac, char **av)
     {
     tat = malloc (sizeof (t_vb));
     visual = malloc (sizeof (t_img));
-    tat->mappa = getmap(av[1]);
-    //printf("\n%s\n", tat->map);
+    tat->mappa = (char **)getmap(av[1]);
+    //printf("\n%s\n", tat->mappa);
     //printf("\n%p\n", tat->mlx_win);
     //map_cord(tat, tat->map);
     tat->size.x = ft_strlen(tat->mappa[0]);
