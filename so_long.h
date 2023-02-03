@@ -1,7 +1,7 @@
 #ifndef SO_LONG_H
 #define SO_LONG_H
 
-//#define SIZE 32
+#define SIZE 32
 
 #include "mlx/mlx.h"
 #include <stdlib.h>
@@ -22,8 +22,7 @@ typedef struct s_img{
     void    *intern_wall;
     void    *jesus;
     void    *penguin;
-    int     img_w;
-    int     img_h;
+    int     taglia;
     char    fload;
 } t_img;
 
@@ -32,7 +31,7 @@ typedef struct s_vb{
     void    *mlx_win;
     t_cord  size;
     char  **mappa;
-    t_img   *imag;
+    t_img   imag;
 } t_vb;
 
 #endif
