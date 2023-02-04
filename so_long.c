@@ -102,33 +102,33 @@ void    ft_img_init(t_vb *tat, int *size)
     tat->imag.door = mlx_xpm_file_to_image(tat->mlx, "/Ninjia&co/Exit.xpm", size, size );
 }
 
-void    image_to_win(t_vb *tat)
+void    image_to_win(t_vb *tat, size_t x, size_t y)
 {   
-    int     x;
-    int     y;
+    int     j;
+    int     k;
 
-    y = 0;
-    while (tat->mappa[y])
+    k = 0;
+    while (&tat->mappa[k] && k <= y)
     {
-    x = 0;
-        while (tat->mappa[y][x])
+        x = 0;
+        while (&tat->mappa[k][j] && j <= x)
         {
-        if(tat->mappa[y][x] == '1')
-            mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.wall, (x * 32), (y * 32));
-        else if(tat->mappa[y][x] == '0')
-            mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.ground, (x * 32), (y * 32));
-        else if(tat->mappa[y][x] == 'P')
-            mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.benino, (x * 32), (y * 32));
-        else if(tat->mappa[y][x] == 'E')
-            mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.door, (x * 32), (y * 32));
-        else if(tat->mappa[y][x] == 'J')
-            mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.jesus, (x * 32), (y * 32));
-        else if(tat->mappa[y][x] == 'C')
-            mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.penguin, (x * 32), (y * 32));
+            if(tat->mappa[k][j] == '1')
+                mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.wall, (j * 32), (k * 32));
+            else if(tat->mappa[k][j] == '0')
+                mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.ground, (j * 32), (k * 32));
+            else if(tat->mappa[k][j] == 'P')
+                mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.benino, (j * 32), (k * 32));
+            else if(tat->mappa[k][j] == 'E')
+                mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.door, (j * 32), (k * 32));
+            else if(tat->mappa[k][j] == 'J')
+                mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.jesus, (j * 32), (k * 32));
+            else if(tat->mappa[k][j] == 'C')
+                mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.penguin, (j * 32), (k * 32));
+            j++;
         }
-        x++;
+        k++;
     }
-    y++;
 }
 
 
@@ -142,22 +142,22 @@ int main(int ac, char **av)
     tat.imag.taglia = 32;
     if (ac == 2)
     {
-    //visual = malloc (sizeof (t_img));
-    temp = getmap(av[1]);
-    tat.mappa = mapmat(temp);
-    free (temp);
-    //printf("\n%s\n", tat->mappa);
-    //printf("\n%p\n", tat->mlx_win);
-    //map_cord(tat, tat->map);
-    tat.size.x = ft_strlen(tat.mappa[0]);
-    tat.size.y = ft_matlen(tat.mappa);
-    tat.mlx = mlx_init();
-    tat.mlx_win = mlx_new_window(tat.mlx, tat.size.x * 32, tat.size.y * 32, "so_long");
-    ft_img_init(&tat,  &tat.imag.taglia);
-    image_to_win(&tat);
-    mlx_hook(tat.mlx_win, 17, 0, close_win, &tat);
-    mlx_key_hook(tat.mlx_win, ft_key_handler, &tat);
-    mlx_loop(tat.mlx);
+        //visual = malloc (sizeof (t_img));
+        temp = getmap(av[1]);
+        tat.mappa = mapmat(temp);
+        free (temp);
+        //printf("\n%s\n", tat->mappa);
+        //printf("\n%d\n", mlx_key_hook);
+        //map_cord(tat, tat->map);
+        tat.size.y = ft_matlen(tat.mappa);
+        tat.size.x = ft_strlen(tat.mappa[0]);
+        tat.mlx = mlx_init();
+        tat.mlx_win = mlx_new_window(tat.mlx, tat.size.x * 32, tat.size.y * 32, "so_long");
+        ft_img_init(&tat, &tat.imag.taglia);
+        image_to_win(&tat, tat.size.x, tat.size.y);
+        mlx_hook(tat.mlx_win, 17, 0, close_win, &tat);
+        mlx_key_hook(tat.mlx_win, ft_key_handler, &tat);
+        mlx_loop(tat.mlx);
     }
     else
     {
