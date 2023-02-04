@@ -94,18 +94,18 @@ int     ft_key_handler(int keycode, t_vb *tat)
 
 void    ft_img_init(t_vb *tat, int *size)
 {
-    tat->imag.benino = mlx_xpm_file_to_image(tat->mlx, "/Ninjia&co/benny.xpm", size, size );
-    tat->imag.ground = mlx_xpm_file_to_image(tat->mlx, "/Ninjia&co/Floor.xpm", size, size );
-    tat->imag.wall = mlx_xpm_file_to_image(tat->mlx, "/Ninjia&co/Wall1.xpm", size, size );
-    tat->imag.jesus = mlx_xpm_file_to_image(tat->mlx, "/Ninjia&co/Jesusticazzi1.xpm", size, size );
-    tat->imag.penguin = mlx_xpm_file_to_image(tat->mlx, "/Ninjia&co/Penguin.xpm", size, size );
-    tat->imag.door = mlx_xpm_file_to_image(tat->mlx, "/Ninjia&co/Exit.xpm", size, size );
+    tat->imag.benino = mlx_xpm_file_to_image(tat->mlx, "./Ninjia&co/benny.xpm", size, size);
+    tat->imag.ground = mlx_xpm_file_to_image(tat->mlx, "./Ninjia&co/Floor.xpm", size, size);
+    tat->imag.wall = mlx_xpm_file_to_image(tat->mlx, "./Ninjia&co/Wall1.xpm", size, size);
+    tat->imag.jesus = mlx_xpm_file_to_image(tat->mlx, "./Ninjia&co/Jesusticazzi1.xpm", size, size);
+    tat->imag.penguin = mlx_xpm_file_to_image(tat->mlx, "./Ninjia&co/Penguin.xpm", size, size);
+    tat->imag.door = mlx_xpm_file_to_image(tat->mlx, "./Ninjia&co/Exit.xpm", size, size);
 }
 
 void    image_to_win(t_vb *tat, size_t x, size_t y)
 {   
-    int     j;
-    int     k;
+    size_t     j;
+    size_t     k;
 
     k = 0;
     while (&tat->mappa[k] && k <= y)
@@ -131,7 +131,6 @@ void    image_to_win(t_vb *tat, size_t x, size_t y)
     }
 }
 
-
 int main(int ac, char **av)
 {
     t_vb tat;
@@ -146,7 +145,7 @@ int main(int ac, char **av)
         temp = getmap(av[1]);
         tat.mappa = mapmat(temp);
         free (temp);
-        //printf("\n%s\n", tat->mappa);
+        //printf("\n%s\n", temp);
         //printf("\n%d\n", mlx_key_hook);
         //map_cord(tat, tat->map);
         tat.size.y = ft_matlen(tat.mappa);
