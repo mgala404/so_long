@@ -70,12 +70,12 @@ int     ft_key_handler(int keycode, t_vb *tat)
 
 void    ft_img_init(t_vb *tat, int *size)
 {
-    tat->imag.benino = mlx_xpm_file_to_image(tat->mlx, "./Ninjia&co/benny.xpm", size, size);
-    tat->imag.ground = mlx_xpm_file_to_image(tat->mlx, "./Ninjia&co/Floor.xpm", size, size);
-    tat->imag.wall = mlx_xpm_file_to_image(tat->mlx, "./Ninjia&co/Wall1.xpm", size, size);
-    tat->imag.jesus = mlx_xpm_file_to_image(tat->mlx, "./Ninjia&co/Jesusticazzi1.xpm", size, size);
-    tat->imag.penguin = mlx_xpm_file_to_image(tat->mlx, "./Ninjia&co/Penguin.xpm", size, size);
-    tat->imag.door = mlx_xpm_file_to_image(tat->mlx, "./Ninjia&co/Exit.xpm", size, size);
+    tat->imag.benino = mlx_xpm_file_to_image(tat->mlx, "Ninjia&co/benny.xpm", size, size);
+    tat->imag.ground = mlx_xpm_file_to_image(tat->mlx, "Ninjia&co/Floor.xpm", size, size);
+    tat->imag.wall = mlx_xpm_file_to_image(tat->mlx, "Ninjia&co/Wall1.xpm", size, size);
+    tat->imag.jesus = mlx_xpm_file_to_image(tat->mlx, "Ninjia&co/Jesusticazzi1.xpm", size, size);
+    tat->imag.penguin = mlx_xpm_file_to_image(tat->mlx, "Ninjia&co/Penguin.xpm", size, size);
+    tat->imag.door = mlx_xpm_file_to_image(tat->mlx, "Ninjia&co/Exit.xpm", size, size);
 }
 
 void    image_to_win(t_vb *tat, size_t x, size_t y)
@@ -84,10 +84,10 @@ void    image_to_win(t_vb *tat, size_t x, size_t y)
     size_t     k;
 
     k = 0;
-    while (&tat->mappa[k] && k <= y)
+    while (&tat->mappa[k])
     {
         x = 0;
-        while (&tat->mappa[k][j] && j <= x)
+        while (&tat->mappa[k][j])
         {
             if(tat->mappa[k][j] == '1')
                 mlx_put_image_to_window(tat->mlx, &tat->mlx_win, &tat->imag.wall, (j * 32), (k * 32));

@@ -32,6 +32,7 @@ typedef struct s_vb{
     t_cord  size;
     char  **mappa;
     t_img   imag;
+    t_cord  p_p;
 } t_vb;
 
 #endif

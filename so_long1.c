@@ -83,7 +83,7 @@ int     ft_key_handler(int keycode, t_vb *tat)
         tat->mappa[tat->p_p.y][tat->p_p.x-1] = 'P';
         tat->p_p.x -= 1;
     }
-    else if ((keycode == 65362 || keycode == 119 )&& (tat->mappa[y-1][x] != '1'))
+    else if ((keycode == 65362 || keycode == 119 ) && (tat->mappa[y-1][x] != '1'))
     {
         mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.ground, (tat->p_p.x  * 32), (tat->p_p.y  * 32));
         mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.benino, (tat->p_p.x * 32), ((tat->p_p.y-1) * 32));
