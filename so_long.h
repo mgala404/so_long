@@ -19,6 +19,7 @@ typedef struct s_img{
     void    *ground;
     void    *wall;
     void    *door;
+    void    *dooropen;
     void    *intern_wall;
     void    *jesus;
     void    *penguin;
@@ -33,6 +34,8 @@ typedef struct s_vb{
     char  **mappa;
     t_img   imag;
     t_cord  p_p;
+    t_cord  Exit;
+    int	cc;
 } t_vb;
 
 #endif
