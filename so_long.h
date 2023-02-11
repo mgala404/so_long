@@ -23,6 +23,7 @@ typedef struct s_img{
     void    *intern_wall;
     void    *jesus;
     void    *penguin;
+    void    *beninoE;
     int     taglia;
     char    fload;
 } t_img;
@@ -36,6 +37,7 @@ typedef struct s_vb{
     t_cord  p_p;
     t_cord  Exit;
     int	cc;
+    int check;
 } t_vb;
 
 #endif

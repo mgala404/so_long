@@ -34,6 +34,7 @@ typedef struct s_vb{
     t_img   imag;
     t_cord  p_p;
     int     cc;
+    int     check;
 } t_vb;
 
 #endif

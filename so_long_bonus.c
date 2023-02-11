@@ -17,6 +17,7 @@ int    close_win (t_vb *tat)
 {
     mlx_destroy_window(tat->mlx, tat->mlx_win);
     mlx_destroy_display(tat->mlx);
+    free(mlx_put_image_to_window);
     free(tat->mlx);
     free(tat->mlx_win);
     free(tat);
@@ -68,23 +69,28 @@ int     ft_key_handler(int keycode, t_vb *tat)
     int c;
 
     c = 0;
+    if(tat->check == 1)
+        close_win(tat);
     if(keycode == 65307)
         close_win(tat);
     if ((keycode == 65363 || keycode == 100 ) && (tat->mappa[y][x+1] != '1'))
     {
-        if (tat->mappa[y][x+1] == 'E')
-        {
-            if (tat->cc == 0)
-                close_win(tat);
-            else
-                return (0);
-        }
         mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.ground, (tat->p_p.x  * 32), (tat->p_p.y  * 32));
         mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.benino, ((tat->p_p.x+1) * 32), (tat->p_p.y * 32));
         if (tat->mappa[tat->p_p.y][tat->p_p.x+1] == 'C')
             tat->cc--;
         if (tat->cc == 0)
             mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.dooropen, (tat->Exit.x * 32), (tat->Exit.y * 32));
+        if (tat->mappa[y][x+1] == 'E')
+        {
+            if (tat->cc == 0)
+            {
+                tat->check = 1;
+                mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.beninoE, (tat->Exit.x * 32), (tat->Exit.y * 32));
+            }
+            else
+                return (0);
+        }
         tat->mappa[tat->p_p.y][tat->p_p.x] = '0';
         tat->mappa[tat->p_p.y][tat->p_p.x+1] = 'P';
         c++;
@@ -92,19 +98,22 @@ int     ft_key_handler(int keycode, t_vb *tat)
     }
     else if ((keycode ==  65361 || keycode == 97 ) && (tat->mappa[y][x-1] != '1'))
     {
-        if (tat->mappa[y][x-1] == 'E')
-        {
-            if (tat->cc == 0)
-                close_win(tat);
-            else
-                return (0);
-        }
         mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.ground, (tat->p_p.x  * 32), (tat->p_p.y  * 32));
         mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.benino, ((tat->p_p.x-1) * 32), (tat->p_p.y * 32));
-        if(tat->mappa[tat->p_p.y][tat->p_p.x-1] == 'C')
+        if (tat->mappa[tat->p_p.y][tat->p_p.x-1] == 'C')
             tat->cc--;
         if (tat->cc == 0)
             mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.dooropen, (tat->Exit.x * 32), (tat->Exit.y * 32));
+        if (tat->mappa[y][x-1] == 'E')
+        {
+            if (tat->cc == 0)
+            {
+                tat->check = 1;
+                mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.beninoE, (tat->Exit.x * 32), (tat->Exit.y * 32));
+            }
+            else
+                return (0);
+        }
         tat->mappa[tat->p_p.y][tat->p_p.x] = '0';
         tat->mappa[tat->p_p.y][tat->p_p.x-1] = 'P';
         c++;
@@ -112,19 +121,22 @@ int     ft_key_handler(int keycode, t_vb *tat)
     }
     else if ((keycode == 65362 || keycode == 119 ) && (tat->mappa[y-1][x] != '1'))
     {
-        if (tat->mappa[y-1][x] == 'E')
-        {
-            if (tat->cc == 0)
-                close_win(tat);
-            else
-                return (0);
-        }
         mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.ground, (tat->p_p.x  * 32), (tat->p_p.y  * 32));
         mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.benino, (tat->p_p.x * 32), ((tat->p_p.y-1) * 32));
         if(tat->mappa[tat->p_p.y-1][tat->p_p.x] == 'C')
             tat->cc--;
         if (tat->cc == 0)
             mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.dooropen, (tat->Exit.x * 32), (tat->Exit.y * 32));
+        if (tat->mappa[y-1][x] == 'E')
+        {
+            if (tat->cc == 0)
+            {
+                tat->check = 1;
+                mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.beninoE, (tat->Exit.x * 32), (tat->Exit.y * 32));
+            }
+            else
+                return (0);
+        }
         tat->mappa[tat->p_p.y][tat->p_p.x] = '0';
         tat->mappa[tat->p_p.y-1][tat->p_p.x] = 'P';
         c++;
@@ -132,19 +144,22 @@ int     ft_key_handler(int keycode, t_vb *tat)
     }
     else if ((keycode == 65364 || keycode == 115) && (tat->mappa[y+1][x] != '1'))
     {
-        if (tat->mappa[y+1][x] == 'E')
-        {
-            if (tat->cc == 0)
-                close_win(tat);
-            else
-                return (0);
-        }
         mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.ground, (tat->p_p.x  * 32), (tat->p_p.y  * 32));
         mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.benino, (tat->p_p.x * 32), ((tat->p_p.y+1) * 32));
         if(tat->mappa[tat->p_p.y+1][tat->p_p.x] == 'C')
             tat->cc--;
         if (tat->cc == 0)
              mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.dooropen, (tat->Exit.x * 32), (tat->Exit.y * 32));
+        if (tat->mappa[y+1][x] == 'E')
+        {
+            if (tat->cc == 0)
+            {
+                tat->check = 1;
+                mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.beninoE, (tat->Exit.x * 32), (tat->Exit.y * 32));
+            }
+            else
+                return (0);
+        }
         tat->mappa[tat->p_p.y][tat->p_p.x] = '0';
         tat->mappa[tat->p_p.y+1][tat->p_p.x] = 'P';
         c++;
@@ -162,6 +177,7 @@ void    ft_img_init(t_vb *tat, int *size)
     tat->imag.penguin = mlx_xpm_file_to_image(tat->mlx, "Ninjia&co/Penguin.xpm", size, size );
     tat->imag.door = mlx_xpm_file_to_image(tat->mlx, "Ninjia&co/Exit.xpm", size, size );
     tat->imag.dooropen = mlx_xpm_file_to_image(tat->mlx, "Ninjia&co/Exitopen.xpm", size, size );
+    tat->imag.beninoE = mlx_xpm_file_to_image(tat->mlx, "Ninjia&co/BeninoExit1.xpm", size, size );
 }
 
 int    image_to_win(t_vb *tat)
@@ -205,11 +221,6 @@ int    image_to_win(t_vb *tat)
     }
 }
 
-int coincounter(t_vb *tat)
-{
-
-}
-
 int main(int ac, char **av)
 {
     t_vb tat;
@@ -220,6 +231,7 @@ int main(int ac, char **av)
     tat.imag.taglia = 32;
     if (ac == 2)
     {
+        tat.check = 0;
         temp = getmap(av[1]);
         tat.mappa = mapmat(temp);
         tat.size.x = ft_strlen(tat.mappa[0]);
@@ -228,7 +240,6 @@ int main(int ac, char **av)
         tat.mlx_win = mlx_new_window(tat.mlx, tat.size.x * 32, tat.size.y * 32, "so_long");
         ft_img_init(&tat, &tat.imag.taglia);
         image_to_win(&tat);
-
         mlx_hook(tat.mlx_win, 17, 0, close_win, &tat);
         mlx_key_hook(tat.mlx_win, ft_key_handler, &tat);
         mlx_loop(tat.mlx);
