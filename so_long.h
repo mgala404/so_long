@@ -14,18 +14,15 @@ typedef struct s_cord{
 } t_cord;
 
 typedef struct s_img{
-    char    type;
     void    *benino;
     void    *ground;
     void    *wall;
     void    *door;
     void    *dooropen;
-    void    *intern_wall;
     void    *jesus;
     void    *penguin;
     void    *beninoE;
     int     taglia;
-    char    fload;
 } t_img;
 
 typedef struct s_vb{

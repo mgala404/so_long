@@ -15,28 +15,27 @@
 
 int    close_win (t_vb *tat)
 {
-    int y = 0;
-    mlx_destroy_image(tat, tat->imag.benino);
-    mlx_destroy_image(tat, tat->imag.beninoE);
-    mlx_destroy_image(tat, tat->imag.penguin);
-    mlx_destroy_image(tat, tat->imag.jesus);
-    mlx_destroy_image(tat, tat->imag.intern_wall);
-    mlx_destroy_image(tat, tat->imag.dooropen);
-    mlx_destroy_image(tat, tat->imag.door);
-    mlx_destroy_image(tat, tat->imag.wall);
-    mlx_destroy_image(tat, tat->imag.ground);
+    int y;
+
+    y = 0;
+    mlx_destroy_image(tat->mlx, tat->imag.benino);
+    mlx_destroy_image(tat->mlx, tat->imag.beninoE);
+    mlx_destroy_image(tat->mlx, tat->imag.penguin);
+    mlx_destroy_image(tat->mlx, tat->imag.jesus);
+    mlx_destroy_image(tat->mlx, tat->imag.dooropen);
+    mlx_destroy_image(tat->mlx, tat->imag.door);
+    mlx_destroy_image(tat->mlx, tat->imag.wall);
+    mlx_destroy_image(tat->mlx, tat->imag.ground);
     mlx_destroy_window(tat->mlx, tat->mlx_win);
-    mlx_destroy_display(tat->mlx);
     while(tat->mappa[y])
     {
         free(tat->mappa[y]);
         y++;
     }
     free(tat->mappa);
+    mlx_destroy_display(tat->mlx);
     free(tat->mlx);
-    free(tat->mlx_win);
-    free(tat);
-    
+    //free(tat);
     exit (0);
 }
 
@@ -54,6 +53,7 @@ char    *getmap(char *path)
         if (!str)
             break;    
         onzo = ft_freejoints(onzo, str);
+        free(str);
     }
     free(str);
     close(fd);
@@ -65,6 +65,7 @@ char **mapmat(char *rawmap)
     char **map;
 
     map = ft_split(rawmap, '\n');
+    free(rawmap);
     return(map);
 }
 
@@ -214,7 +215,7 @@ void    ft_img_init(t_vb *tat, int *size)
     tat->imag.beninoE = mlx_xpm_file_to_image(tat->mlx, "Ninjia&co/BeninoExit1.xpm", size, size );
 }
 
-int    image_to_win(t_vb *tat)
+void    image_to_win(t_vb *tat)
 {   
     int     x;
     int     y;
@@ -223,32 +224,32 @@ int    image_to_win(t_vb *tat)
     y = 0;
     while (tat->mappa[y])
     {
-    x = 0;
+        x = 0;
         while (tat->mappa[y][x])
         {
-        if(tat->mappa[y][x] == '1')
-            mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.wall, (x * 32), (y * 32));
-        else if(tat->mappa[y][x] == '0')
-            mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.ground, (x * 32), (y * 32));
-        else if(tat->mappa[y][x] == 'P')
+            if(tat->mappa[y][x] == '1')
+                mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.wall, (x * 32), (y * 32));
+            else if(tat->mappa[y][x] == '0')
+                mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.ground, (x * 32), (y * 32));
+            else if(tat->mappa[y][x] == 'P')
             {
                 mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.benino, (x * 32), (y * 32));
                 tat->p_p.x = x; 
                 tat->p_p.y = y;
             }
-        else if(tat->mappa[y][x] == 'E')
-        {
-            mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.door, (x * 32), (y * 32));
-            tat->Exit.x = x;
-            tat->Exit.y = y;
-        }
-        else if(tat->mappa[y][x] == 'J')
-            mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.jesus, (x * 32), (y * 32));
-        else if(tat->mappa[y][x] == 'C')
-        {
-            mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.penguin, (x * 32), (y * 32));
-            tat->cc++;
-        }
+            else if(tat->mappa[y][x] == 'E')
+            {
+                mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.door, (x * 32), (y * 32));
+                tat->Exit.x = x;
+                tat->Exit.y = y;
+            }
+            else if(tat->mappa[y][x] == 'J')
+                mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.jesus, (x * 32), (y * 32));
+            else if(tat->mappa[y][x] == 'C')
+            {
+                mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.penguin, (x * 32), (y * 32));
+                tat->cc++;
+            }
         x++;
         }
      y++;
@@ -258,8 +259,8 @@ int    image_to_win(t_vb *tat)
 int main(int ac, char **av)
 {
     t_vb tat;
-    t_img *visual;
-    t_cord  *cord;
+    /*t_img *visual;
+    t_cord  *cord;*/
     char    *temp;
 
     tat.imag.taglia = 32;
