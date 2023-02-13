@@ -20,7 +20,7 @@ int    close_win (t_vb *tat)
     y = 0;
     mlx_destroy_image(tat->mlx, tat->imag.benino);
     mlx_destroy_image(tat->mlx, tat->imag.beninoE);
-    mlx_destroy_image(tat->mlx, tat->imag.penguin);
+    mlx_destroy_image(tat->mlx, tat->imag.p);
     mlx_destroy_image(tat->mlx, tat->imag.jesus);
     mlx_destroy_image(tat->mlx, tat->imag.dooropen);
     mlx_destroy_image(tat->mlx, tat->imag.door);
@@ -39,228 +39,13 @@ int    close_win (t_vb *tat)
     exit (0);
 }
 
-char    *getmap(char *path)
-{
-    int     fd;
-    char    *str;
-    char    *onzo;
 
-    onzo = calloc (1, 1);
-    fd = open(path, O_RDONLY);
-    while (1)
-    {
-        str = get_next_line(fd);
-        if (!str)
-            break;    
-        onzo = ft_freejoints(onzo, str);
-        free(str);
-    }
-    free(str);
-    close(fd);
-    return (onzo);
-}
 
-char **mapmat(char *rawmap)
-{
-    char **map;
 
-    map = ft_split(rawmap, '\n');
-    free(rawmap);
-    return(map);
-}
-
-int     ft_matlen(char **map)
-{
-    int y;
-
-    y = 0;
-    while(map[y])
-        y++;
-    return (y);
-}
-
-int     ft_key_handler(int keycode, t_vb *tat)
-{
-    int x = tat->p_p.x;
-    int y = tat->p_p.y;
-    int c;
-
-    c = 0;
-    if(tat->check == 1)
-        close_win(tat);
-    if(keycode == 65307)
-        close_win(tat);
-    if ((keycode == 65363 || keycode == 100 ) && (tat->mappa[y][x+1] != '1'))
-    {
-        if(tat->mappa[y][x+1] != 'E')
-        {
-            mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.ground, (tat->p_p.x  * 32), (tat->p_p.y  * 32));
-            mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.benino, ((tat->p_p.x+1) * 32), (tat->p_p.y * 32));
-            if (tat->mappa[tat->p_p.y][tat->p_p.x+1] == 'C')
-                tat->cc--;
-            if (tat->cc == 0)
-                mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.dooropen, (tat->Exit.x * 32), (tat->Exit.y * 32));
-            tat->mappa[tat->p_p.y][tat->p_p.x] = '0';
-            tat->mappa[tat->p_p.y][tat->p_p.x+1] = 'P';
-            c++;
-            tat->p_p.x += 1;
-        }
-        else if (tat->mappa[y][x+1] == 'E')
-        {
-            if (tat->cc == 0)
-            {
-                tat->check = 1;
-                mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.beninoE, (tat->Exit.x * 32), (tat->Exit.y * 32));
-                mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.ground, (tat->p_p.x  * 32), (tat->p_p.y  * 32));
-            }
-            else
-                return (0);
-        }
-        
-    }
-    else if ((keycode ==  65361 || keycode == 97 ) && (tat->mappa[y][x-1] != '1'))
-    {
-        if(tat->mappa[y][x-1] != 'E')
-        {
-            mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.ground, (tat->p_p.x  * 32), (tat->p_p.y  * 32));
-            mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.benino, ((tat->p_p.x-1) * 32), (tat->p_p.y * 32));
-            if (tat->mappa[tat->p_p.y][tat->p_p.x-1] == 'C')
-                tat->cc--;
-            if (tat->cc == 0)
-                mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.dooropen, (tat->Exit.x * 32), (tat->Exit.y * 32));
-        tat->mappa[tat->p_p.y][tat->p_p.x] = '0';
-        tat->mappa[tat->p_p.y][tat->p_p.x-1] = 'P';
-        c++;
-        tat->p_p.x -= 1;
-        }
-        else if (tat->mappa[y][x-1] == 'E')
-        {
-            if (tat->cc == 0)
-            {
-                tat->check = 1;
-                mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.beninoE, (tat->Exit.x * 32), (tat->Exit.y * 32));
-                mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.ground, (tat->p_p.x  * 32), (tat->p_p.y  * 32));
-            }
-            else
-                return (0);
-        }
-    }
-    else if ((keycode == 65362 || keycode == 119 ) && (tat->mappa[y-1][x] != '1'))
-    {
-        if(tat->mappa[y-1][x] != 'E')
-        {
-            mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.ground, (tat->p_p.x  * 32), (tat->p_p.y  * 32));
-            mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.benino, (tat->p_p.x * 32), ((tat->p_p.y-1) * 32));
-            if(tat->mappa[tat->p_p.y-1][tat->p_p.x] == 'C')
-                tat->cc--;
-            if (tat->cc == 0)
-                mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.dooropen, (tat->Exit.x * 32), (tat->Exit.y * 32));
-            tat->mappa[tat->p_p.y][tat->p_p.x] = '0';
-            tat->mappa[tat->p_p.y-1][tat->p_p.x] = 'P';
-            c++;
-            tat->p_p.y -= 1;
-        }
-        else if (tat->mappa[y-1][x] == 'E')
-        {
-            if (tat->cc == 0)
-            {
-                tat->check = 1;
-                mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.beninoE, (tat->Exit.x * 32), (tat->Exit.y * 32));
-                mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.ground, (tat->p_p.x  * 32), (tat->p_p.y  * 32));
-            }
-            else
-                return (0);
-        }
-    }
-    else if ((keycode == 65364 || keycode == 115) && (tat->mappa[y+1][x] != '1'))
-    {
-        if (tat->mappa[y+1][x] != 'E')
-        {
-            mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.ground, (tat->p_p.x  * 32), (tat->p_p.y  * 32));
-            mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.benino, (tat->p_p.x * 32), ((tat->p_p.y+1) * 32));
-            if(tat->mappa[tat->p_p.y+1][tat->p_p.x] == 'C')
-                tat->cc--;
-            if (tat->cc == 0)
-                mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.dooropen, (tat->Exit.x * 32), (tat->Exit.y * 32));
-            tat->mappa[tat->p_p.y][tat->p_p.x] = '0';
-            tat->mappa[tat->p_p.y+1][tat->p_p.x] = 'P';
-            c++;
-            tat->p_p.y += 1;
-        }
-        if (tat->mappa[y+1][x] == 'E')
-        {
-            if (tat->cc == 0)
-            {
-                tat->check = 1;
-                mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.beninoE, (tat->Exit.x * 32), (tat->Exit.y * 32));
-                mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.ground, (tat->p_p.x  * 32), (tat->p_p.y  * 32));
-            }
-            else
-                return (0);
-        }
-        
-    }   
-    return (0);
-}
-
-void    ft_img_init(t_vb *tat, int *size)
-{
-    tat->imag.benino = mlx_xpm_file_to_image(tat->mlx, "Ninjia&co/benny.xpm", size, size );
-    tat->imag.ground = mlx_xpm_file_to_image(tat->mlx, "Ninjia&co/Floor.xpm", size, size );
-    tat->imag.wall = mlx_xpm_file_to_image(tat->mlx, "Ninjia&co/Wall1.xpm", size, size );
-    tat->imag.jesus = mlx_xpm_file_to_image(tat->mlx, "Ninjia&co/Jesusticazzi1.xpm", size, size );
-    tat->imag.penguin = mlx_xpm_file_to_image(tat->mlx, "Ninjia&co/Penguin.xpm", size, size );
-    tat->imag.door = mlx_xpm_file_to_image(tat->mlx, "Ninjia&co/Exit.xpm", size, size );
-    tat->imag.dooropen = mlx_xpm_file_to_image(tat->mlx, "Ninjia&co/Exitopen.xpm", size, size );
-    tat->imag.beninoE = mlx_xpm_file_to_image(tat->mlx, "Ninjia&co/BeninoExit1.xpm", size, size );
-}
-
-void    image_to_win(t_vb *tat)
-{   
-    int     x;
-    int     y;
-
-    tat->cc = 0;
-    y = 0;
-    while (tat->mappa[y])
-    {
-        x = 0;
-        while (tat->mappa[y][x])
-        {
-            if(tat->mappa[y][x] == '1')
-                mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.wall, (x * 32), (y * 32));
-            else if(tat->mappa[y][x] == '0')
-                mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.ground, (x * 32), (y * 32));
-            else if(tat->mappa[y][x] == 'P')
-            {
-                mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.benino, (x * 32), (y * 32));
-                tat->p_p.x = x; 
-                tat->p_p.y = y;
-            }
-            else if(tat->mappa[y][x] == 'E')
-            {
-                mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.door, (x * 32), (y * 32));
-                tat->Exit.x = x;
-                tat->Exit.y = y;
-            }
-            else if(tat->mappa[y][x] == 'J')
-                mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.jesus, (x * 32), (y * 32));
-            else if(tat->mappa[y][x] == 'C')
-            {
-                mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.penguin, (x * 32), (y * 32));
-                tat->cc++;
-            }
-        x++;
-        }
-     y++;
-    }
-}
 
 int main(int ac, char **av)
 {
     t_vb tat;
-    /*t_img *visual;
-    t_cord  *cord;*/
     char    *temp;
 
     tat.imag.taglia = 32;
@@ -276,7 +61,9 @@ int main(int ac, char **av)
         ft_img_init(&tat, &tat.imag.taglia);
         image_to_win(&tat);
         mlx_hook(tat.mlx_win, 17, 0, close_win, &tat);
-        mlx_key_hook(tat.mlx_win, ft_key_handler, &tat);
+        mlx_hook(tat.mlx_win, 2, (1L<<0), ft_key_handler, &tat);
+        //non serve perche con le maschere diverse si muove con press e non release
+        //mlx_key_hook(tat.mlx_win, ft_key_handler, &tat);
         mlx_loop(tat.mlx);
     }
     else

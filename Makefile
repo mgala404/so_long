@@ -4,7 +4,10 @@ LIBFT = libft/libft.a
 
 MINILIBX = mlx/libmlx.a
 
-SRC = so_long.c
+SRC = so_long.c \
+	imagine_ucan.c \
+	e20.c \
+	mappets.c \
 	
 BNS = so_long_bonus.c
 	
@@ -14,10 +17,8 @@ LINKS = -lm -lX11 -lXext
 
 MAPS = map.ber
 
-all: $(NAME)
-
-
-$(SRC) = gcc $(FLAGS) $(SRC) $(MINILIBX) $(LIBFT) $(LINKS) -o $(NAME)
+all:
+	gcc $(SRC) $(MINILIBX) $(LIBFT) $(LINKS) $(FLAGS) -o $(NAME)
 	
 
 fclean:   	libfclean

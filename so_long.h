@@ -20,7 +20,7 @@ typedef struct s_img{
     void    *door;
     void    *dooropen;
     void    *jesus;
-    void    *penguin;
+    void    *p;
     void    *beninoE;
     int     taglia;
 } t_img;
@@ -36,5 +36,14 @@ typedef struct s_vb{
     int	cc;
     int check;
 } t_vb;
+
+int     ft_key_handler(int keycode, t_vb *tat);
+int    close_win (t_vb *tat);
+char    *getmap(char *path);
+char **mapmat(char *rawmap);
+int     ft_matlen(char **map);
+void    ft_img_init(t_vb *tat, int *size);
+void    image_to_win(t_vb *tat);
+
 
 #endif
