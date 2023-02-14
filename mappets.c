@@ -23,9 +23,19 @@ char    *getmap(char *path)
 
 char **mapmat(char *rawmap)
 {
+   // int y;
+   // y =0;
     char **map;
 
     map = ft_split(rawmap, '\n');
+    //cexit(map);
+   //  while(map)
+ //   {
+   //     free(map[y]);
+  //      y++;
+  //  }
+   // free(map);
+   // map = ft_split(rawmap, '\n');
     free(rawmap);
     return(map);
 }

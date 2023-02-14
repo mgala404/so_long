@@ -56,14 +56,13 @@ int main(int ac, char **av)
         tat.mappa = mapmat(temp);
         tat.size.x = ft_strlen(tat.mappa[0]);
         tat.size.y = ft_matlen(tat.mappa);
+        //cborders(&tat);
         tat.mlx = mlx_init();
         tat.mlx_win = mlx_new_window(tat.mlx, tat.size.x * 32, tat.size.y * 32, "so_long");
         ft_img_init(&tat, &tat.imag.taglia);
         image_to_win(&tat);
         mlx_hook(tat.mlx_win, 17, 0, close_win, &tat);
         mlx_hook(tat.mlx_win, 2, (1L<<0), ft_key_handler, &tat);
-        //non serve perche con le maschere diverse si muove con press e non release
-        //mlx_key_hook(tat.mlx_win, ft_key_handler, &tat);
         mlx_loop(tat.mlx);
     }
     else
