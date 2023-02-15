@@ -44,7 +44,9 @@ char **mapmat(char *rawmap);
 int     ft_matlen(char **map);
 void    ft_img_init(t_vb *tat, int *size);
 void    image_to_win(t_vb *tat);
-void	cexit(char **map, t_cord size, t_cord p_p);
+void	cexit(t_vb *tat, char **map, t_cord size, t_cord p_p);
 void    cborders(t_vb *tat);
-
+void    ctr(t_vb *tat, char **map);
+int     strlencheck(char **map, t_vb *tat);
+void    mapmatcheck(char *rawmap, t_vb *tat);
 #endif

@@ -23,21 +23,20 @@ char    *getmap(char *path)
 
 char **mapmat(char *rawmap)
 {
-   // int y;
-   // y =0;
     char **map;
 
     map = ft_split(rawmap, '\n');
-    //cexit(map);
-   //  while(map)
- //   {
-   //     free(map[y]);
-  //      y++;
-  //  }
-   // free(map);
-   // map = ft_split(rawmap, '\n');
     free(rawmap);
     return(map);
+}
+
+void    mapmatcheck(char *rawmap, t_vb *tat)
+{
+    char **map;
+
+    map = ft_split(rawmap, '\n');
+    cexit(tat, map, tat->size, tat->p_p);
+   // free(rawmap);
 }
 
 int     ft_matlen(char **map)
@@ -48,4 +47,29 @@ int     ft_matlen(char **map)
     while(map[y])
         y++;
     return (y);
+}
+
+int     strlencheck(char **map, t_vb *tat)
+{
+    int k;
+    int x;
+    int y;
+
+    k = ft_matlen(map);
+    y = 0;
+    while (k <= y)
+    {
+        x = 0;
+        while (map[y][x])
+        {
+            if (map[y][x] == 'P')
+            {
+                tat->p_p.x = x;
+                tat->p_p.y = y;
+            }
+            x++;
+        }
+        y++;
+    }
+    return (x);
 }

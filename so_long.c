@@ -35,28 +35,26 @@ int    close_win (t_vb *tat)
     free(tat->mappa);
     mlx_destroy_display(tat->mlx);
     free(tat->mlx);
-    //free(tat);
     exit (0);
 }
-
-
-
-
 
 int main(int ac, char **av)
 {
     t_vb tat;
     char    *temp;
+    char    *tempura;
 
     tat.imag.taglia = 32;
     if (ac == 2)
     {
         tat.check = 0;
         temp = getmap(av[1]);
+        tempura = temp;
         tat.mappa = mapmat(temp);
-        tat.size.x = ft_strlen(tat.mappa[0]);
+        tat.size.x = strlencheck(tat.mappa, &tat);
         tat.size.y = ft_matlen(tat.mappa);
-        //cborders(&tat);
+        mapmatcheck(tempura, &tat);
+        cborders(&tat);
         tat.mlx = mlx_init();
         tat.mlx_win = mlx_new_window(tat.mlx, tat.size.x * 32, tat.size.y * 32, "so_long");
         ft_img_init(&tat, &tat.imag.taglia);
