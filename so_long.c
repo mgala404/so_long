@@ -51,12 +51,12 @@ int main(int ac, char **av)
         temp = getmap(av[1]);
         tempura = temp;
         tat.mappa = mapmat(temp);
+        tat.size.y = ft_matlen(tat.mappa, &tat);
         tat.size.x = strlencheck(tat.mappa, &tat);
-        tat.size.y = ft_matlen(tat.mappa);
-        mapmatcheck(tempura, &tat);
         cborders(&tat);
         tat.mlx = mlx_init();
         tat.mlx_win = mlx_new_window(tat.mlx, tat.size.x * 32, tat.size.y * 32, "so_long");
+        mapmatcheck(tempura, &tat);
         ft_img_init(&tat, &tat.imag.taglia);
         image_to_win(&tat);
         mlx_hook(tat.mlx_win, 17, 0, close_win, &tat);
@@ -65,7 +65,7 @@ int main(int ac, char **av)
     }
     else
     {
-        write(1, "e la mappa? coglione", 21);
+        write(1, "e la mappa? coglione\n", 22);
         return (0);
     }
 }

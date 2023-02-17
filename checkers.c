@@ -12,6 +12,7 @@ void    ft_error(t_vb *tat)
         y++;
     }
     free(tat->mappa);
+    ft_printf("%s", "cambia sta mappa coglione\n");
     exit (0);
 }
 
@@ -62,15 +63,19 @@ void    ctr(t_vb *tat, char **map)
 
 void	fill(char ***map, t_cord size, t_cord p_p, char to_fill)
 {
+    t_cord  d_d;
+
+    d_d.x = p_p.x;
+    d_d.y = p_p.y;
 	if (p_p.y < 0 || p_p.y >= size.y || p_p.x < 0 || p_p.x >= size.x
-		|| *map[p_p.y][p_p.x] == to_fill)
+		|| *map[d_d.y][d_d.x] == to_fill)
 		return;
 
-	*map[p_p.y][p_p.x] = '1';
-	fill(map, size, (t_cord){p_p.x - 1, p_p.y}, to_fill);
-	fill(map, size, (t_cord){p_p.x + 1, p_p.y}, to_fill);
-	fill(map, size, (t_cord){p_p.x, p_p.y - 1}, to_fill);
-	fill(map, size, (t_cord){p_p.x, p_p.y + 1}, to_fill);
+	*map[d_d.y][d_d.x] = '1';
+	fill(map, size, (t_cord){d_d.x - 1, d_d.y}, to_fill);
+	fill(map, size, (t_cord){d_d.x + 1, d_d.y}, to_fill);
+	fill(map, size, (t_cord){d_d.x, d_d.y - 1}, to_fill);
+	fill(map, size, (t_cord){d_d.x, d_d.y + 1}, to_fill);
 }
 
 void	cexit(t_vb *tat, char **map, t_cord size, t_cord p_p)

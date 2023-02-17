@@ -39,25 +39,15 @@ void    mapmatcheck(char *rawmap, t_vb *tat)
    // free(rawmap);
 }
 
-int     ft_matlen(char **map)
-{
-    int y;
-
-    y = 0;
-    while(map[y])
-        y++;
-    return (y);
-}
-
 int     strlencheck(char **map, t_vb *tat)
 {
-    int k;
+    //int k;
     int x;
     int y;
 
-    k = ft_matlen(map);
+    //k = ft_matlen(map);
     y = 0;
-    while (k <= y)
+    while (map[y])
     {
         x = 0;
         while (map[y][x])
@@ -73,3 +63,17 @@ int     strlencheck(char **map, t_vb *tat)
     }
     return (x);
 }
+
+int     ft_matlen(char **map, t_vb *tat)
+{
+    int y;
+
+    y = 0;
+    while(map[y])
+    {
+        strlencheck(map, tat);
+        y++;
+    }
+    return (y);
+}
+

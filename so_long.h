@@ -41,7 +41,7 @@ int     ft_key_handler(int keycode, t_vb *tat);
 int    close_win (t_vb *tat);
 char    *getmap(char *path);
 char **mapmat(char *rawmap);
-int     ft_matlen(char **map);
+int     ft_matlen(char **map, t_vb *tat);
 void    ft_img_init(t_vb *tat, int *size);
 void    image_to_win(t_vb *tat);
 void	cexit(t_vb *tat, char **map, t_cord size, t_cord p_p);
