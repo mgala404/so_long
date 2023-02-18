@@ -1,1 +1,0 @@
-gcc so_long.h so_long.c libft/libft.a mlx/libmlx.a -no-pie -lm -lX11 -lXext

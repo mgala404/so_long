@@ -85,7 +85,7 @@ main(){
 		*) MAKE=make ;;
 	esac
 	cd $(dirname $0)
-	trap at_exit		EXIT
+	trap at_exit		exit
 	trap sigint_handler	INT
 
 	test_default_main

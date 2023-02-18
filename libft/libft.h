@@ -55,7 +55,7 @@ char	*ft_strnstr(const char *big, const char *little, size_t len);
 void	*ft_calloc(size_t num, size_t dim);
 char	*ft_strdup(const char *s);
 char	*get_next_line(int fd);
-char    *ft_freejoints(char *buff_line, char *letta);
+char	*ft_freejoints(char *buff_line, char *letta);
 /*funzioni plus*/
 char	*ft_substr(const char *s, unsigned int start, size_t len);
 char	*ft_itoa(int n);
@@ -78,12 +78,12 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
-int	ft_printfputchar(int c);
-int	ft_printfstring(char *frase);
-int	ft_printfunsi(unsigned int u);
-int	ft_printfputnbr(int d);
-int	ft_printfnbrexa(unsigned int nu, char format);
-int	ft_printfpointer(unsigned long k);
-int	ft_printf(const char *str, ...);
+int		ft_printfputchar(int c);
+int		ft_printfstring(char *frase);
+int		ft_printfunsi(unsigned int u);
+int		ft_printfputnbr(int d);
+int		ft_printfnbrexa(unsigned int nu, char format);
+int		ft_printfpointer(unsigned long k);
+int		ft_printf(const char *str, ...);
 
 #endif
