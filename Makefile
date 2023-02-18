@@ -9,6 +9,7 @@ SRC = so_long.c \
 	e20.c \
 	mappets.c \
 	checkers.c\
+	etravers.c\
 	
 BNS = so_long_bonus.c
 	

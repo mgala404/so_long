@@ -21,21 +21,19 @@ char    *getmap(char *path)
     return (onzo);
 }
 
-char **mapmat(char *rawmap)
+char **mapmat(char *rawmap, t_vb *tat)
 {
     char **map;
 
     map = ft_split(rawmap, '\n');
+    tat->tempura = ft_split(rawmap, '\n');
     free(rawmap);
     return(map);
 }
 
-void    mapmatcheck(char *rawmap, t_vb *tat)
+void    mapmatcheck(t_vb *tat)
 {
-    char **map;
-
-    map = ft_split(rawmap, '\n');
-    cexit(tat, map, tat->size, tat->p_p);
+    cexit(tat, tat->tempura, tat->p_p);
    // free(rawmap);
 }
 
@@ -45,7 +43,7 @@ int     strlencheck(char **map, t_vb *tat)
     int x;
     int y;
 
-    //k = ft_matlen(map);
+    tat->cc = 0;
     y = 0;
     while (map[y])
     {
@@ -57,6 +55,8 @@ int     strlencheck(char **map, t_vb *tat)
                 tat->p_p.x = x;
                 tat->p_p.y = y;
             }
+            else if (map[y][x] == 'C')
+                tat->cc += 1;
             x++;
         }
         y++;

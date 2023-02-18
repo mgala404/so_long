@@ -5,6 +5,7 @@
 
 void    mvsx(t_vb *tat, int x, int y)
 {
+        jkiller(tat, x-1, y);
         if(tat->mappa[y][x-1] != 'E')
         {
             mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.ground, (tat->p_p.x  * 32), (tat->p_p.y  * 32));
@@ -26,11 +27,13 @@ void    mvsx(t_vb *tat, int x, int y)
                 mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.ground, (tat->p_p.x  * 32), (tat->p_p.y  * 32));
             }
         }
+        tat->trav++;         
 }
 
 void    mvdx(t_vb *tat, int x, int y)
 {
- if(tat->mappa[y][x+1] != 'E')
+    jkiller(tat, x+1, y); 
+    if(tat->mappa[y][x+1] != 'E')
         {
             mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.ground, (tat->p_p.x  * 32), (tat->p_p.y  * 32));
             mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.benino, ((tat->p_p.x+1) * 32), (tat->p_p.y * 32));
@@ -51,10 +54,12 @@ void    mvdx(t_vb *tat, int x, int y)
                 mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.ground, (tat->p_p.x  * 32), (tat->p_p.y  * 32));
             }
         }
+        tat->trav++;         
 }
 
 void    mvsv(t_vb *tat, int x, int y)
 {
+        jkiller(tat, x, y-1); 
         if(tat->mappa[y-1][x] != 'E')
         {
             mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.ground, (tat->p_p.x  * 32), (tat->p_p.y  * 32));
@@ -76,10 +81,12 @@ void    mvsv(t_vb *tat, int x, int y)
                 mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.ground, (tat->p_p.x  * 32), (tat->p_p.y  * 32));
             }
         }
-    }
+        tat->trav++;         
+}
 
 void    mvgx(t_vb *tat, int x, int y)
-    {
+{
+        jkiller(tat, x, y+1);
         if (tat->mappa[y+1][x] != 'E')
         {
             mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.ground, (tat->p_p.x  * 32), (tat->p_p.y  * 32));
@@ -101,8 +108,9 @@ void    mvgx(t_vb *tat, int x, int y)
                 mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.ground, (tat->p_p.x  * 32), (tat->p_p.y  * 32));
             }
         }
-        
-    }
+        tat->trav++;                  
+}
+
 int     ft_key_handler(int keycode, t_vb *tat)
 {
     int x = tat->p_p.x;
@@ -123,11 +131,11 @@ int     ft_key_handler(int keycode, t_vb *tat)
     else if ((keycode == 65362 || keycode == 119 ) && (tat->mappa[y-1][x] != '1'))
     {
         mvsv(tat, x, y);
-
     }
     else if ((keycode == 65364 || keycode == 115) && (tat->mappa[y+1][x] != '1'))
     {
     mvgx(tat, x, y);
-    }   
+    }
+    ebro(tat);
     return (0);
-}        
+}

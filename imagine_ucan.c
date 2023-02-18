@@ -33,28 +33,53 @@ else if(tat->mappa[y][x] == 'E')
     }
 else if(tat->mappa[y][x] == 'J')
     mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.jesus, (x * 32), (y * 32));
+
 else if(tat->mappa[y][x] == 'C')
     {
     mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.p, (x * 32), (y * 32));
-    tat->cc++;
     }
 }
 
-void    image_to_win(t_vb *tat)
+void    image_to_win(t_vb *tat, int muro)
 {   
     int     x;
     int     y;
 
-    tat->cc = 0;
     y = 0;
-    while (tat->mappa[y])
+    if (muro)
     {
-        x = 0;
-        while (tat->mappa[y][x])
+        while (tat->mappa[y])
         {
-        imagineallthepeople(tat, x, y);  
-        x++;
+         x = 0;
+         while (tat->mappa[y][x])
+            {
+            imagineallthepeople(tat, x, y);  
+            x++;
+            }
+            y++;
         }
-     y++;
+    }
+    else
+    {
+        while (tat->mappa[y])
+        {
+         x = 0;
+         while (tat->mappa[y][x])
+        {
+            if(tat->mappa[y][x] == '1')
+                mlx_put_image_to_window(tat->mlx, tat->mlx_win, tat->imag.wall, (x * 32), (y * 32));
+            x++;
+        }
+          y++;
+        }
     }
 }
+
+void    jkiller(t_vb *tat, int x , int y)
+{
+    if (tat->mappa[y][x] == 'J')  
+    {
+        close_win(tat);
+    }
+}
+
