@@ -4,12 +4,13 @@ LIBFT = libft/libft.a
 
 MINILIBX = mlx/libmlx.a
 
-SRC = so_long.c \
-	imagine_ucan.c \
+SRC = so_long_bonus.c \
+	imagine_ucan_bonus.c \
 	e20.c \
-	mappets.c \
-	checkers.c\
-	etravers.c\
+	mappets_bonus.c \
+	checkers_bonus.c\
+	etravers_bonus.c\
+	e21.c\
 	
 BNS = so_long_bonus.c
 	

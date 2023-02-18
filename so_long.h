@@ -1,4 +1,5 @@
 #ifndef SO_LONG_H
+
 #define SO_LONG_H
 
 #define SIZE 32
@@ -33,10 +34,12 @@ typedef struct s_vb{
     char    **tempura;
     t_img   imag;
     t_cord  p_p;
+    t_cord  p;
     t_cord  Exit;
     int	cc;
     int check;
     int     trav;
+    
 } t_vb;
 
 int     ft_key_handler(int keycode, t_vb *tat);
@@ -55,6 +58,16 @@ void    checkpex(t_vb *tat);
 void	check_flood(char **map, t_vb *tat, t_cord p_p);
 void    jkiller(t_vb *tat, int x , int y);
 void    ebro(t_vb *tat);
+void	ft_muro(t_vb *tat, int y);
+void	accozzaglia(t_vb *tat);
+void	cveloce(t_vb *tat, int p, int e);
+void	check_flood_logic_x(t_vb *tat, t_cord p, t_cord p_p, int mod);
+void	check_flood_logic_y(t_vb *tat, t_cord p, t_cord p_p, int mod);
+void	ft_error(t_vb *tat);
+void	apriporta(t_vb *tat);
+
+
+
 
 
 
